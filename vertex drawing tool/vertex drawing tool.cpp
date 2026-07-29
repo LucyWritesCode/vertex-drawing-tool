@@ -7,11 +7,8 @@ struct Window {
     int y;
 };
 
-void vertexPlace(std::vector<Vector2>& vertices) {
-    Vector2 mousePos = GetMousePosition();
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        vertices.push_back(mousePos);
-    }
+void vertexPlace(std::vector<Vector2>& vertices , Vector2 position) {
+    vertices.push_back(position);
 }
 
 int main()
@@ -25,8 +22,11 @@ int main()
     bool joinVertices = false;
 
     while (!WindowShouldClose()) {
-        vertexPlace(vertices);
+        Vector2 mousePos = GetMousePosition();
 
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            vertexPlace(vertices, mousePos);
+        }
         if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
             vertices.clear();
         }
